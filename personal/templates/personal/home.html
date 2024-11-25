@@ -1,0 +1,148 @@
+{% extends 'personal/base.html' %}
+
+{% block content %}
+<!-- Home Section -->
+<section id="home" class="header">
+    <div class="overlay"></div>
+    <div class="header-content container">
+        <h1 class="header-title">
+            <span class="up">HI!</span>
+            <span class="down">I am ROMI</span>
+        </h1>
+        <p class="header-subtitle">FULLSTACK WEB DEVELOPER</p>
+        <a href="https://romifrontend.vercel.app">
+            <button class="btn btn-primary">Visit My Works</button>
+        </a>
+        
+    </div>
+</section>
+
+{% load static %}
+<!-- About Section -->
+<section id="about" class="section pt-0">
+    <div class="container text-center">
+        <div class="about">
+            <div class="about-img-holder">
+                <img src="{% static 'imgs/romi.png' %}" alt="About Me Image" class="about-img">
+            </div>
+            <div class="about-caption">
+                <p class="section-subtitle">Who Am I?</p>
+                <h2 class="section-title mb-3">About Me</h2>
+                <p>
+                    Now, I am 18 years old. I am based in East Java, Indonesia. I went to SMAN 3 Bojonegoro majoring in Science and Technology. I'm really excited to improve my coding skills &; develop websites.
+                </p>
+                <a href="https://www.linkedin.com/in/romifrontend" target="_blank">
+                    <button class="btn-rounded btn btn-outline-primary mt-4">Kunjungi LinkedIn</button>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- section untuk Portfolio -->
+<section class="section" id="portfolio">
+    <div class="container text-center">
+        <p class="section-subtitle">What I Did ?</p>
+        <h6 class="section-title mb-6">Portfolio</h6>
+        <!-- row -->
+        <div class="row">
+            {% for project in my_projects %}
+                <div class="col-md-4">
+                    <a href="#" class="portfolio-card">
+                        <img src="{{ project.image.url }}" class="portfolio-card-img" alt="{{ project.title }}">
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <h4>{{ project.title }}</h4>
+                                <p class="font-weight-normal">Category: {{ project.date }}</p>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div> 
+    </div> 
+</section>
+
+<!-- Guest Book Section -->
+<section id="guest-book" class="section">
+    <div class="container text-center">
+        <p class="section-subtitle">How can you communicate?</p>
+        <h6 class="section-title mb-5">Guest Book</h6>
+
+        <!-- Guest Book Form -->
+        <form method="POST" class="contact-form col-md-10 col-lg-8 m-auto">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-sm-6">
+                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="form-group col-sm-6">
+                    <input type="text" name="address" class="form-control" placeholder="Enter Address" required>
+                </div>
+                <div class="form-group col-sm-12">
+                    <textarea name="message" rows="6" class="form-control" placeholder="Write Something" required></textarea>
+                </div>
+                <div class="form-group col-sm-12 mt-3">
+                    <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- section untuk Guest Book Entries -->
+<section class="guest-book-entries text-center py-5">
+    <div class="container">
+        <h5 class="mb-4">Guest Book Entries</h5>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <ul class="list-unstyled">
+                    {% for entry in guestbook_entries %}
+                        <li class="mb-4 p-3 border rounded">
+                            <strong class="d-block mb-2">{{ entry.name }}</strong>
+                            <em class="text-muted d-block mb-2">from {{ entry.address }}</em>
+                            <p class="text-start">{{ entry.message }}</p>
+                        </li>
+                    {% empty %}
+                        <li class="text-muted">No messages yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- Contact section -->
+<section id="contact" class="mycontact section-sm bg-primary d-flex align-items-center" style="height: 60vh;">
+    <div class="container text-center">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-sm-10 text-center">
+                <div class="row align-items-center">
+                    <div class="col-sm-6 mb-4 mb-md-0">
+                        <h6 class="title text-light">Want to work with me?</h6>
+                        <p class="m-0 text-light">Feel free to contact me anytime.</p>
+                        <div class="contact-info mt-4">
+                            <p class="text-light"><strong>Email:</strong> rominmuh230@gmail.com</p>
+                            <p class="text-light"><strong>Address:</strong> East Java, Indonesia</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 text-center">
+                        <a href="https://www.linkedin.com/in/romifrontend" target="_blank">
+                            <button class="btn btn-lg my-font btn-light rounded">Hire Me</button>
+                        </a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+
+
+{% endblock content %}
