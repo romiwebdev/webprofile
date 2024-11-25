@@ -1,13 +1,8 @@
 {
-    "builds": [{
-      "src": "webprofile/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.13.0" }
-    }],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "webprofile/wsgi.py"
-      }
-    ]
+  "builds": [
+    { "src": "manage.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "manage.py" }
+  ]
 }
